@@ -1,66 +1,155 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1 align="center">HuggingFace Diffusers WebUI</h1>
+<h3 align="center" style="margin-top: -10px">using Laravel 11</h3>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<p>HuggingFace Diffusers WebUI for Stable Diffusion created with Laravel 11.</p>
 
-## About Laravel
+## Prerequisites / System Requirements
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Before starting the installation process, please ensure you have met the following prerequisites with the recommended versions:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. **Composer** – Install Composer, version **2.5** or higher, to manage PHP dependencies.
+   - [Download Composer](https://getcomposer.org/download/)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2. **Local Web Server** – A local server is required to run the application. Recommended options include:
+   - **XAMPP** – Version **8.2** or higher (supports PHP 8.2+).
+     - [Download XAMPP](https://www.apachefriends.org/index.html)
+   - **Laragon** – Version **5.0** or higher.
+     - [Download Laragon](https://laragon.org/download/)
+   - Or any other local server supporting **PHP 8.2+**.
 
-## Learning Laravel
+3. **Ngrok Account** – Create or use an existing Ngrok account. 
+   - [Sign Up for Ngrok](https://dashboard.ngrok.com/signup)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+4. **Google Account** – Required for accessing and using Google Colab.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Once these requirements are met, you can proceed with the next steps in the installation process.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## WebUI Setup Guide
 
-## Laravel Sponsors
+Follow the steps below to install the application:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. Clone the Repository
 
-### Premium Partners
+First, clone the repository to your local machine using Git.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```bash
+git clone https://github.com/dil27/sdpipeline-diffusers-webui.git
+cd sdpipeline-diffusers-webui
+```
 
-## Contributing
+### 2. Install Laravel
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Install the Laravel framework. Ensure you have Composer installed before proceeding. If you don't have Composer, refer to the [Composer Installation Guide](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos).
 
-## Code of Conduct
+Run the following command to install Laravel:
+```bash
+composer install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3. Create Database
 
-## Security Vulnerabilities
+- Create a new database using your database management tool (e.g., phpMyAdmin, MySQL, Workbench, etc.)<br>If you are using XAMPP or Laragon, you can [open this](http://localhost/phpmyadmin).
+- Name the new database. *(example: zerodiffusion)*
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Configure Environment File
+- Copy the example environment file to `.env`
+- Configure the database section below:
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=zerodiffuser
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## License
+### 5. Run Migrations
+Run the migrations to set up the necessary tables in the database:
+```bash
+php artisan migrate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 6. Serve the WebUI
+You can now serve the application locally using Laravel's built-in development server
+```bash
+php artisan serve
+```
+
+By default, the application will be accessible at [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
+<br><br><br>
+## HuggingFace Diffusers on Google Colab.
+
+You need to run the Diffusers on Google Colab.
+
+### 1. Open Notebook
+Open the Jupyter Notebook using the link below:
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dil27/HuggingFace-Diffusers-with-API-using-Flask-on-Google-Colab/blob/main/Diffusion_with_API.ipynb)
+
+### 2. Connect Runtime
+Ensure you are using GPU runtime type.<br>
+To change the runtime type, click on the `Runtime` menu and then select `Change runtime type`.<br> For *free* users, you can use the **T4 GPU**. However, I recommend using the **A100 GPU** or **L4 GPU** for better performance.
+
+### 3. Run Cells
+Run the cells by clicking the *play* button on the right side of each cell.<br> Make sure you have already set up your *ngrok* token before proceeding.
+
+Get your ngrok token [here](https://dashboard.ngrok.com/get-started/your-authtoken)
+
+### 4. Get the Ngrok URL
+After running the cells, you will receive an ngrok token that you can use to access the Diffusers API.
+
+<br><br><br><br>
+## For Developers
+
+### API Endpoint
+Here's the API endpoints that you can use from Google Colab.
+
+| Endpoint | Method | Description | JSON Body |
+|--|--|--|--|
+| `/connect` | POST | to check runtime connectivity |  |
+| `/checkpipe` | POST | to check active checkpoint |  |
+| `/loadcheckpoint` | POST | to load Stable Diffusion Checkpoint | *Required* |
+| `/txt2img` | POST | to generate images | *Required* |
+
+### API JSON Body
+
+#### 1. `/loadcheckpoint`
+| Parameter | Data Type | Required | Description |
+|--|--|--|--|
+| **checkpoint** | *String* | Yes | *Huggingface Checkpoint path* |
+
+<br>Example:
+```JSON
+{
+    "checkpoint": "stabilityai/stable-diffusion-3.5-large"
+}
+```
+Browse more checkpoint [here](https://huggingface.co/models?library=diffusers&sort=trending).
+
+#### 2. `/txt2img`
+| Parameter | Data Type | Required | Description |
+|--|--|--|--|
+| **prompt** | *String* | Yes | *The prompt or prompts to guide image generation.* |
+| **neg** | *String* | Yes | *The prompt or prompts to guide what to not include in image generation.<br>Ignored when not using guidance (`guidance_scale` < 1).* |
+| **seed** | *Float* | Yes | *Seed* |
+| **width** | *Float* | Yes | *The width in pixels of the generated image.* |
+| **height** | *Float* | Yes | *The height in pixels of the generated image.* |
+| **sampling** | *Float* | Yes | *The number of denoising steps.<br>More denoising steps usually lead to a higher quality image at the expense of slower inference.* |
+| **guidance** | *Float* | Yes | *A higher guidance scale value encourages the model to generate images closely linked to the text prompt at the expense of lower image quality. Guidance scale is enabled when `guidance_scale` > 1.* |
+| **checkpoint** | *String* | Yes | *Huggingface Checkpoint path* |
+
+
+<br>Example:
+```JSON
+{
+    "prompt": "An astronaut rides a sportbike in the countryside",
+    "neg": "Moon, Spaceship",
+    "seed": 123456789,
+    "width": 1024,
+    "height": 800,
+    "sampling": 25,
+    "guidance": 7.5,
+    "checkpoint": "stabilityai/stable-diffusion-3.5-large",
+}
+```
